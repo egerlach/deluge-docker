@@ -1,0 +1,10 @@
+version: '2'
+services:
+        deluged:
+                build: deluged
+        deluge-web:
+                build: deluge-web
+                ports:
+                        - "8112:8112"
+                depends_on:
+                        - deluged
