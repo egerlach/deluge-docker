@@ -9,9 +9,9 @@ RUN apt-get update && \
         moreutils
 
 COPY start.sh /
+COPY core.conf /
 
 USER debian-deluged
-COPY core.conf /var/lib/deluged/config
 
 VOLUME "/var/lib/deluged/config"
 
