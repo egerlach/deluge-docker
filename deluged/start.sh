@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG=/var/lib/deluged/config/
+CONFIG=/var/lib/deluged/config
 SALT=`cat $CONFIG/Saltfile`
 if [ -z $SALT ]; then
   SALT=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32} > $CONFIG/Saltfile`
@@ -16,6 +16,10 @@ if [ ! -z "$TORRENT_PORT" ]; then
     jq "if has(\"random_port\") then .random_port=false else . end" | \
     jq "if has(\"listen_ports\") then .listen_ports=[$TORRENT_PORT,$TORRENT_PORT] else . end" | \
     sponge $CONFIG/core.conf
+fi
+
+if ! grep -q "docker:$SHARED_SECRET" $CONFIG/auth; then
+  echo "docker:$SHARED_SECRET:10" >> $CONFIG/auth
 fi
 
 HASHED_PASSWD=`echo -n "$SALT$PASSWD" | sha1sum | awk '{ print $1 }'`
