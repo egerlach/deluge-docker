@@ -1,10 +1,22 @@
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y \
-	deluge-common
-RUN apt-get install -y \
-	deluge-web
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y \
+        deluge-common \
+        deluge-web \
+        jq \
+        moreutils
+
+COPY entrypoint.sh /
+COPY hostlist.conf.1.2 /
+COPY web.conf /
+
+#USER debian-deluged
+
+VOLUME "/var/lib/deluged/web-config"
+
 EXPOSE 8112
-ENTRYPOINT ["deluge-web"]
-CMD ["-Ldebug"]
+
+CMD ["/bin/bash", "/entrypoint.sh"]
 

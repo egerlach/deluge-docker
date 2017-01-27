@@ -14,6 +14,7 @@ COPY core.conf /
 USER debian-deluged
 
 VOLUME "/var/lib/deluged/config"
+VOLUME "/srv"
 
 EXPOSE 32395 58846
 CMD ["/bin/bash", "/start.sh"]
