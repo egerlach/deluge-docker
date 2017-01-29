@@ -6,10 +6,6 @@ chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged /var/lib/deluged/web-con
 
 GOSU="/usr/local/bin/gosu $DELUGE_USER_ID:$DELUGE_GROUP_ID"
 
-if [ ! -f $CONFIG/core.conf ]; then
-  $GOSU cp /core.conf $CONFIG
-fi
-
 if [ ! -f $CONFIG/web.conf ]; then
   $GOSU cp /web.conf $CONFIG
 fi
