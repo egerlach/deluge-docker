@@ -12,8 +12,6 @@ COPY entrypoint.sh /
 COPY hostlist.conf.1.2 /
 COPY web.conf /
 
-#USER debian-deluged
-
 VOLUME "/var/lib/deluged/web-config"
 
 EXPOSE 8112
