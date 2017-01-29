@@ -14,9 +14,13 @@ if [ ! -f $CONFIG/core.conf ]; then
   cp /core.conf $CONFIG
 fi
 
+cat $CONFIG/core.conf | \
+  jq "if has(\"random_port\") then .random_port=false else . end" | \
+  jq "if has(\"allow_remote\") then .allow_remote=true else . end" | \
+  $GOSU sponge $CONFIG/core.conf
+
 if [ ! -z "$TORRENT_PORT" ]; then
   cat $CONFIG/core.conf | \
-    jq "if has(\"random_port\") then .random_port=false else . end" | \
     jq "if has(\"listen_ports\") then .listen_ports=[$TORRENT_PORT,$TORRENT_PORT] else . end" | \
     $GOSU sponge $CONFIG/core.conf
 fi
