@@ -25,6 +25,7 @@ HASHED_PASSWD=`echo -n "$SALT$PASSWD" | sha1sum | awk '{ print $1 }'`
 cat $CONFIG/web.conf | \
   jq "if has(\"pwd_sha1\") then .pwd_sha1=\"$HASHED_PASSWD\" else . end" | \
   jq "if has(\"pwd_salt\") then .pwd_salt=\"$SALT\" else . end" | \
+  jq "if has(\"first_login\") then .first_login=\"false\" else . end" | \
   sponge $CONFIG/web.conf
 
 cat $CONFIG/hostlist.conf.1.2 | \
