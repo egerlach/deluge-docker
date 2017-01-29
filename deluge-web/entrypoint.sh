@@ -2,7 +2,7 @@
 
 CONFIG=/var/lib/deluged/web-config
 
-chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged /var/lib/deluged/config
+chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged /var/lib/deluged/web-config
 
 GOSU="/usr/local/bin/gosu $DELUGE_USER_ID:$DELUGE_GROUP_ID"
 
