@@ -1,5 +1,9 @@
 FROM debian:jessie
 
+ENV GOSU_VERSION=1.10 \
+    DELUGE_USER_ID=1000 \
+    DELUGE_GROUP_ID=1000
+
 RUN apt-get update \
     && apt-get dist-upgrade -y \
     && apt-get install -y \
