@@ -6,7 +6,7 @@ for d in "$DIRS"; do
   mkdir -p /srv/$d
 done
 
-chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged/config
+chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged /var/lib/deluged/config
 
 GOSU="/usr/local/bin/gosu $DELUGE_USER_ID:$DELUGE_GROUP_ID"
 
