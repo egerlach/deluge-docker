@@ -6,6 +6,8 @@ for d in "$DIRS"; do
   mkdir -p /srv/$d
 done
 
+chown $DELUGE_USER_ID:$DELUGE_GROUP_ID /var/lib/deluged/config
+
 GOSU="/usr/local/bin/gosu $DELUGE_USER_ID:$DELUGE_GROUP_ID"
 
 if [ ! -f $CONFIG/core.conf ]; then
