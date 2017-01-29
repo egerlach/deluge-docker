@@ -19,12 +19,6 @@ cat $CONFIG/core.conf | \
   jq "if has(\"allow_remote\") then .allow_remote=true else . end" | \
   $GOSU sponge $CONFIG/core.conf
 
-if [ ! -z "$TORRENT_PORT" ]; then
-  cat $CONFIG/core.conf | \
-    jq "if has(\"listen_ports\") then .listen_ports=[$TORRENT_PORT,$TORRENT_PORT] else . end" | \
-    $GOSU sponge $CONFIG/core.conf
-fi
-
 if ! grep -q "docker:$SHARED_SECRET" $CONFIG/auth; then
   $GOSU /bin/bash -c "echo \"docker:$SHARED_SECRET:10\" >> $CONFIG/auth"
 fi
