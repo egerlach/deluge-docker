@@ -1,7 +1,6 @@
-FROM debian:jessie
+FROM debian:stretch
 
 ENV GOSU_VERSION=1.10 \
-    DELUGE_VERSION="1.3.13+git20161130.48cedf63-1" \
     DELUGE_USER_ID=1000 \
     DELUGE_GROUP_ID=1000
 
@@ -15,10 +14,6 @@ RUN apt-get update \
         ca-certificates \
         wget \
     && rm -rf /var/lib/apt/lists/* \
-    && wget -O /tmp/deluge-common.deb "http://deb.debian.org/debian/pool/main/d/deluge/deluge-common_${DELUGE_VERSION}_all.deb" \
-    && wget -O /tmp/deluge-web.deb "http://deb.debian.org/debian/pool/main/d/deluge/deluge-web_${DELUGE_VERSION}_all.deb" \
-    && dpkg -i /tmp/deluge-common.deb /tmp/deluge-web.deb \
-    && rm /tmp/deluge-common.deb /tmp/deluge-web.deb \
     && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
     && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
     && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
