@@ -23,4 +23,6 @@ if ! grep -q "docker:$SHARED_SECRET" $CONFIG/auth; then
   $GOSU /bin/bash -c "echo \"docker:$SHARED_SECRET:10\" >> $CONFIG/auth"
 fi
 
+umask 0000
+
 $GOSU /usr/bin/deluged -d -c$CONFIG "$@"
