@@ -9,6 +9,7 @@ RUN apt-get update \
     && apt-get install -y \
         deluge-common \
         deluge-web \
+        procps \
         jq \
         moreutils \
         ca-certificates \
