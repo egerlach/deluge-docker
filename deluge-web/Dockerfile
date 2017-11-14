@@ -28,7 +28,7 @@ RUN apt-get update \
         gpg --keyserver "$server" --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 && break || : ; \
         done \
     && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
     && gosu nobody true \
     && apt-get purge -y --auto-remove ca-certificates wget
